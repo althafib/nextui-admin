@@ -59,16 +59,16 @@ export const __Navbar = () => {
         </NavbarBrand>
         <ul className="hidden lg:flex gap-4 justify-start ml-2">
           {siteConfig.navItems.map((item) => (
-            <NavbarItem key={item.href}>
+            <NavbarItem key={item.url}>
               <NextLink
                 className={clsx(
                   linkStyles({ color: "foreground" }),
                   "data-[active=true]:text-primary data-[active=true]:font-medium"
                 )}
                 color="foreground"
-                href={item.href}
+                href={item.url}
               >
-                {item.label}
+                {item.title}
               </NextLink>
             </NavbarItem>
           ))}
@@ -116,7 +116,7 @@ export const __Navbar = () => {
 
       <NavbarMenu>
         {searchInput}
-        <div className="mx-4 mt-2 flex flex-col gap-2">
+        {/* <div className="mx-4 mt-2 flex flex-col gap-2">
           {siteConfig.navMenuItems.map((item, index) => (
             <NavbarMenuItem key={`${item}-${index}`}>
               <Link
@@ -134,7 +134,7 @@ export const __Navbar = () => {
               </Link>
             </NavbarMenuItem>
           ))}
-        </div>
+        </div> */}
       </NavbarMenu>
     </NextUINavbar>
   );
