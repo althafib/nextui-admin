@@ -44,7 +44,7 @@ export function confirmationToast(data: {
   toast(data.title || "Are you sure?", {
     description: data.message || "You want do this?",
     icon: data.icon,
-    duration: 1500,
+    duration: 10000,
     closeButton: false,
     cancel: {
       label: data.cancelBtnLabel,
