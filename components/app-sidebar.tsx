@@ -57,8 +57,6 @@ export function AppSidebar() {
   const myProfile = async () => {
     const session = await getSession();
     try {
-      console.log({ session });
-
       setUser(session?.user);
     } catch (error: any) {
       toast.error(error.message || "Uh oh! Something went wrong.");

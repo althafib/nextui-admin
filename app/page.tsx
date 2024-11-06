@@ -1,8 +1,10 @@
+"use server";
+import { getUsers } from "@/actions/user.action";
 import { Logo } from "@/components/icons";
 import Login from "@/components/login";
 import { title, subtitle } from "@/components/primitives";
 
-export default function Home() {
+export default async function Home() {
   return (
     <section className="container mx-auto max-w-7xl pt-16 px-6 flex-grow">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 h-full">

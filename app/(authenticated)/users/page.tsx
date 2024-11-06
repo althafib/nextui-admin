@@ -7,7 +7,7 @@ import {
   TableHeader,
   TableRow,
 } from "@nextui-org/table";
-import React from "react";
+import React, { useEffect } from "react";
 import { columns, users } from "../dashboard/data";
 import { User } from "@nextui-org/user";
 import { Chip, ChipProps } from "@nextui-org/chip";
