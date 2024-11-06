@@ -13,6 +13,7 @@ export function successToast(data: {
     icon: data.icon,
     duration: data.duration || 1500,
     dismissible: data.dismissible || true,
+    closeButton: false,
   });
 }
 
@@ -27,6 +28,7 @@ export function errorToast(data: {
     icon: data.icon,
     duration: data.duration || 1500,
     dismissible: data.dismissible || false,
+    closeButton: false,
   });
 }
 
@@ -42,7 +44,7 @@ export function confirmationToast(data: {
   toast(data.title || "Are you sure?", {
     description: data.message || "You want do this?",
     icon: data.icon,
-    duration: 10000,
+    duration: 1500,
     closeButton: false,
     cancel: {
       label: data.cancelBtnLabel,
