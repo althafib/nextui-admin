@@ -104,13 +104,6 @@ export function AppSidebar() {
           <SidebarGroupLabel>Group 1</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
-              <SidebarMenuItem>
-                <SidebarMenuButton asChild isActive>
-                  <Link href={""}>
-                    <span>{"item.title"}</span>{" "}
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
