@@ -15,6 +15,7 @@ import { Tooltip } from "@nextui-org/tooltip";
 import { DeleteIcon, EditIcon, EyeIcon } from "@/components/icons";
 import Link from "next/link";
 import { Pagination } from "@nextui-org/pagination";
+import { Input } from "@nextui-org/input";
 
 const statusColorMap: Record<string, ChipProps["color"]> = {
   active: "success",
@@ -88,8 +89,22 @@ export default function Users() {
 
   return (
     <>
-      <div className="flex flex-col space-x-3">
-        <h2>Users</h2>
+      <div className="flex flex-col">
+        <div className="items-center justify-between">
+          <div className="flex flex-col gap-4 md:flex-row w-full">
+            <div className="basis-1/2">
+              <h2 className="text-3xl font-bold tracking-tight">Users</h2>
+            </div>
+            <div className="basis-1/2">
+              <Input
+                type="text"
+                label="Search"
+                labelPlacement="outside"
+                description={"Search users"}
+              />
+            </div>
+          </div>
+        </div>
         <div className="flex flex-col px-2 py-2 gap-4 ">
           <Table aria-label="Example table with custom cells">
             <TableHeader columns={columns}>
