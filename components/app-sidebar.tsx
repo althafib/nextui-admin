@@ -104,6 +104,13 @@ export function AppSidebar() {
           <SidebarGroupLabel>Group 1</SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
+              <SidebarMenuItem>
+                <SidebarMenuButton asChild isActive>
+                  <Link href={""}>
+                    <span>{"item.title"}</span>{" "}
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
               {items.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild>
@@ -140,7 +147,7 @@ export function AppSidebar() {
         <SidebarMenu>
           <SidebarMenuItem>
             <DropdownMenu>
-              <DropdownMenuTrigger className="p-7" asChild>
+              <DropdownMenuTrigger className="py-6" asChild>
                 <SidebarMenuButton>
                   <User
                     avatarProps={{ radius: "lg", src: "/user.jpg" }}
