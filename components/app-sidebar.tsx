@@ -73,7 +73,7 @@ export function AppSidebar() {
     try {
       confirmationToast({
         btnLabel: "Yes",
-        cancelBtnLabel: "No",
+        cancelBtnLabel: "Cancel",
         message: "Do you really want to logout?",
         icon: <AlertCircleIcon color="red" />,
         async onConfirm() {
