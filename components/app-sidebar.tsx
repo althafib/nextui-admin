@@ -1,3 +1,4 @@
+"use client";
 import {
   Sidebar,
   SidebarContent,
@@ -11,15 +12,11 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 import {
-  Calendar,
-  ChevronDown,
+  AlertCircleIcon,
+  CheckCircle,
   ChevronUp,
-  Home,
-  Inbox,
   LayoutDashboard,
   LogOut,
-  Search,
-  Settings,
   User2,
 } from "lucide-react";
 import {
@@ -28,11 +25,17 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "./ui/dropdown-menu";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { User } from "@nextui-org/user";
 import { Divider } from "@nextui-org/divider";
 import Link from "next/link";
 import { Logo } from "./icons";
+import { useRouter } from "next/navigation";
+import { type User as UserT } from "@/types/user.type";
+import { getSession } from "next-auth/react";
+import toast from "react-hot-toast";
+import { confirmationToast, successToast } from "@/lib/toaster";
+import { logOut } from "@/actions/auth.action";
 
 const items = [
   {
@@ -48,6 +51,43 @@ const items = [
 ];
 
 export function AppSidebar() {
+  const router = useRouter();
+  const [user, setUser] = useState<UserT>();
+
+  const myProfile = async () => {
+    const session = await getSession();
+    try {
+      console.log({ session });
+
+      setUser(session?.user);
+    } catch (error: any) {
+      toast.error(error.message || "Uh oh! Something went wrong.");
+    }
+  };
+
+  useEffect(() => {
+    myProfile();
+  }, []);
+
+  const appLlogout = async () => {
+    try {
+      confirmationToast({
+        btnLabel: "Yes",
+        cancelBtnLabel: "No",
+        message: "Do you really want to logout?",
+        icon: <AlertCircleIcon color="red" />,
+        async onConfirm() {
+          await logOut();
+          successToast({
+            message: "Logged out successfully.",
+            icon: <CheckCircle color="green" />,
+          });
+          router.push("/");
+        },
+        async onCancel() {},
+      });
+    } catch (error) {}
+  };
   return (
     <Sidebar>
       <SidebarHeader>
@@ -104,10 +144,10 @@ export function AppSidebar() {
                 <SidebarMenuButton>
                   <User
                     avatarProps={{ radius: "lg", src: "/user.jpg" }}
-                    description={"sample@email.com"}
-                    name={"Admin"}
+                    description={user?.email ? user.email : "sample@email.com"}
+                    name={user?.name}
                   >
-                    {"user.email"}
+                    {user?.name}
                   </User>{" "}
                   <ChevronUp className="ml-auto" />
                 </SidebarMenuButton>
@@ -122,7 +162,10 @@ export function AppSidebar() {
                 <DropdownMenuItem className="cursor-pointer">
                   <span>Settings</span>
                 </DropdownMenuItem>
-                <DropdownMenuItem className="text-destructive focus:bg-destructive focus:text-destructive-foreground cursor-pointer">
+                <DropdownMenuItem
+                  onClick={appLlogout}
+                  className="text-destructive focus:bg-destructive focus:text-destructive-foreground cursor-pointer"
+                >
                   <LogOut className="mr-2 h-4 w-4" />
                   <span>Sign out</span>
                 </DropdownMenuItem>

@@ -8,6 +8,8 @@ import { Providers } from "./providers";
 import { siteConfig } from "@/config/site";
 import { fontSans } from "@/config/fonts";
 import { Navbar } from "@/components/navbar";
+import { Toaster } from "react-hot-toast";
+import { Toaster as SonnerToast } from "@/components/ui/sonner";
 
 export const metadata: Metadata = {
   title: {
@@ -44,6 +46,13 @@ export default function RootLayout({
         <Providers themeProps={{ attribute: "class", defaultTheme: "dark" }}>
           <div className="relative flex flex-col h-screen">
             {/* <Navbar /> */}
+            <Toaster position="top-center" />
+            <SonnerToast
+              closeButton
+              position="top-center"
+              theme="dark"
+              visibleToasts={1}
+            />
             <main>{children}</main>
           </div>
         </Providers>
